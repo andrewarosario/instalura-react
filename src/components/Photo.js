@@ -5,14 +5,14 @@ class PhotoHeader extends Component {
         return (
             <header className="foto-header">
                 <figure className="foto-usuario">
-                    <img src="https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-19/11199408_569104449895751_1837574990_a.jpg" alt="foto do usuario" />
+                    <img src={this.props.photo.urlPerfil} alt="foto do usuario" />
 
                     <figcaption className="foto-usuario">
-                        <a href="">alots</a>
+                        <a href="">{this.props.photo.loginUsuario}</a>
                     </figcaption>
                 </figure>
 
-                <time className="foto-data">03/10/2016 20:13</time>
+                <time className="foto-data">{this.props.photo.horario}</time>
             </header>
         );
     }
@@ -23,27 +23,25 @@ class PhotoInfo extends Component {
         return (
             <div className="foto-info">
                 <div className="foto-info-likes">
-                    <a href="">alots_ssa</a>, <a href="">rafael_rollo</a> curtiram
+                    {this.props.photo.likers.map(liker => <a key={liker.login} href="">{liker.login}, </a>)} curtiram
                 </div>
 
                 <p className="foto-info-legenda">
                     <a className="foto-info-autor">autor</a>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, illo?
+                    {this.props.photo.comentario}
                 </p>
 
                 <ul className="foto-info-comentarios">
-                    <li className="comentario">
-                        <a className="foto-info-autor">seguidor</a>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem ad, molestiae.
-                    </li>
-                    <li className="comentario">
-                        <a className="foto-info-autor">seguidor</a>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt cumque earum molestias voluptatem modi nihil sit magnam ratione eveniet distinctio magni error asperiores dignissimos tempora expedita, laborum ex soluta hic maiores veritatis deserunt.
-                    </li>
-                    <li className="comentario">
-                        <a className="foto-info-autor">seguidor</a>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum laudantium quae ab fuga odio delectus maiores voluptatibus sit commodi quidem.
-                    </li>
+                    {
+                        this.props.photo.comentarios.map(comment => {
+                            return (
+                                <li key={comment.id} className="comentario">
+                                    <a className="foto-info-autor">{comment.login}</a>
+                                    {comment.texto}
+                                </li>
+                            );
+                        })
+                    }
                 </ul>
             </div>
         );
@@ -69,11 +67,11 @@ class Photo extends Component {
     render() {
         return (
             <div className="foto">
-                <PhotoHeader />
+                <PhotoHeader photo={this.props.photo} />
 
-                <img src="https://instagram.fcgh10-1.fna.fbcdn.net/t51.2885-15/e35/14482111_1635089460122802_8984023070045896704_n.jpg?ig_cache_key=MTM1MzEzNjM4NzAxMjIwODUyMw%3D%3D.2" alt="foto" className="foto-src" />
+                <img src={this.props.photo.urlFoto} alt="foto" className="foto-src" />
 
-                <PhotoInfo />
+                <PhotoInfo photo={this.props.photo} />
                 <PhotoUpdates />
             </div>
         );
