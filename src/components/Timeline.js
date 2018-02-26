@@ -11,7 +11,7 @@ class Timeline extends Component {
     }
 
     componentDidMount() {
-        fetch('http://instalura-api.herokuapp.com/api/public/fotos/alots')
+        fetch(`http://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('token')}`)
             .then(response => response.json())
             .then(photos => {
                 this.setState({
