@@ -21,9 +21,10 @@ ReactDOM.render(
                 state: {
                     from: props.location
                 }
-            }} /> } />
+            }} />} />
             <Route path="/login" render={props => !is_logged() ? <Login {...props} /> : <Redirect to="/" /> } />
             <Route path="/logout" component={Logout} />
+            <Route path="/usuario/:login" component={App}  />
         </Switch>
     </BrowserRouter>
     , document.getElementById('root'));

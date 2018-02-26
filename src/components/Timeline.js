@@ -8,16 +8,33 @@ class Timeline extends Component {
         this.state = {
             photos: []
         };
+
+        this.login = this.props.login;
     }
 
     componentDidMount() {
-        fetch(`http://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('token')}`)
-            .then(response => response.json())
-            .then(photos => {
-                this.setState({
-                    photos: photos
-                });
+        this.loadPhotos();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.login = nextProps.login;
+
+        this.loadPhotos();
+    }
+
+    loadPhotos = () => {
+        let url;
+        if (this.login === undefined) {
+            url = `http://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('token')}`;
+        } else {
+            url = `http://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
+        }
+
+        fetch(url).then(response => response.json()).then(photos => {
+            this.setState({
+                photos: photos
             });
+        });
     }
 
     render() {
