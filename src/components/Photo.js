@@ -50,13 +50,25 @@ class PhotoInfo extends Component {
 }
 
 class PhotoUpdates extends Component {
+    like = event => {
+        event.preventDefault();
+
+        this.props.like(this.props.photo.id);
+    }
+
+    comment = event => {
+        event.preventDefault();
+
+        this.props.comment(this.props.photo.id, this.commentInput.value);
+    }
+
     render() {
         return (
             <section className="fotoAtualizacoes">
-                <a href="" className="fotoAtualizacoes-like">Likar</a>
+                <a onClick={this.like} className={ this.props.photo.likeada ? 'fotoAtualizacoes-like-ativo' : 'fotoAtualizacoes-like' }>Likar</a>
 
-                <form className="fotoAtualizacoes-form">
-                    <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" />
+                <form onSubmit={this.comment} className="fotoAtualizacoes-form">
+                    <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" ref={input => this.commentInput = input} />
                     <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit" />
                 </form>
             </section>
@@ -73,7 +85,7 @@ class Photo extends Component {
                 <img src={this.props.photo.urlFoto} alt="foto" className="foto-src" />
 
                 <PhotoInfo photo={this.props.photo} />
-                <PhotoUpdates />
+                <PhotoUpdates {...this.props} />
             </div>
         );
     }
