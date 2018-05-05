@@ -5,7 +5,7 @@ class Header extends Component {
     search = event => {
         event.preventDefault();
 
-        fetch(`http://instalura-api.herokuapp.com/api/public/fotos/${this.query.value}`)
+        fetch(`https://instalura-api.herokuapp.com/api/public/fotos/${this.query.value}`)
             .then(response => response.json())
             .then(photos => {
                 PubSub.publish('timeline', { photos });

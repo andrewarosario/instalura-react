@@ -14,7 +14,7 @@ class Login extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        fetch('http://instalura-api.herokuapp.com/api/public/login', {
+        fetch('https://instalura-api.herokuapp.com/api/public/login', {
             method: 'POST',
             headers: new Headers({
                 'Content-type': 'application/json'

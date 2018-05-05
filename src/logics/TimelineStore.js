@@ -12,7 +12,7 @@ class TimelineStore {
     }
 
     like = photoId => {
-        fetch(`http://instalura-api.herokuapp.com/api/fotos/${photoId}/like?X-AUTH-TOKEN=${localStorage.getItem('token')}`, {
+        fetch(`https://instalura-api.herokuapp.com/api/fotos/${photoId}/like?X-AUTH-TOKEN=${localStorage.getItem('token')}`, {
             method: 'POST'
         }).then(response => {
             if (!response.ok) {
@@ -37,7 +37,7 @@ class TimelineStore {
     }
 
     comment = (photoId, commentText) => {
-        fetch(`http://instalura-api.herokuapp.com/api/fotos/${photoId}/comment?X-AUTH-TOKEN=${localStorage.getItem('token')}`, {
+        fetch(`https://instalura-api.herokuapp.com/api/fotos/${photoId}/comment?X-AUTH-TOKEN=${localStorage.getItem('token')}`, {
             method: 'POST',
             body: JSON.stringify({
                 texto: commentText

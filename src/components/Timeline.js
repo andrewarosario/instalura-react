@@ -33,9 +33,9 @@ class Timeline extends Component {
     loadPhotos = () => {
         let url;
         if (this.login === undefined) {
-            url = `http://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('token')}`;
+            url = `https://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('token')}`;
         } else {
-            url = `http://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
+            url = `https://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
         }
 
         this.props.store.list(url);
